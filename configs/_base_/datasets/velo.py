@@ -121,46 +121,50 @@ train_dataloader = dict(
             # and box_type_3d='Depth' in sunrgbd and scannet dataset.
             box_type_3d='LiDAR',
             backend_args=backend_args)))
-# val_dataloader = dict(
-#     batch_size=1,
-#     num_workers=1,
-#     persistent_workers=True,
-#     drop_last=False,
-#     sampler=dict(type='DefaultSampler', shuffle=False),
-#     dataset=dict(
-#         type=dataset_type,
-#         data_root=data_root,
-#         # data_prefix=dict(pts='training/velodyne_reduced'),
-#         ann_file='velo_infos_val.pkl',
-#         pipeline=test_pipeline,
-#         modality=input_modality,
-#         test_mode=True,
-#         metainfo=metainfo,
-#         box_type_3d='LiDAR',
-#         backend_args=backend_args))
-# test_dataloader = dict(
-#     batch_size=1,
-#     num_workers=1,
-#     persistent_workers=True,
-#     drop_last=False,
-#     sampler=dict(type='DefaultSampler', shuffle=False),
-#     dataset=dict(
-#         type=dataset_type,
-#         data_root=data_root,
-#         # data_prefix=dict(pts='training/velodyne_reduced'),
-#         ann_file='velo_infos_val.pkl',
-#         pipeline=test_pipeline,
-#         modality=input_modality,
-#         test_mode=True,
-#         metainfo=metainfo,
-#         box_type_3d='LiDAR',
-#         backend_args=backend_args))
-# val_evaluator = dict(
-#     type='KittiMetric',
-#     ann_file=data_root + 'velo_infos_val.pkl',
-#     metric='bbox',
-#     backend_args=backend_args)
-# test_evaluator = val_evaluator
+val_dataloader = dict(
+    batch_size=1,
+    num_workers=1,
+    persistent_workers=True,
+    drop_last=False,
+    sampler=dict(type='DefaultSampler', shuffle=False),
+    dataset=dict(
+        type=dataset_type,
+        data_root=data_root,
+        # data_prefix=dict(pts='training/velodyne_reduced'),
+        ann_file='velo_infos_val.pkl',
+        pipeline=test_pipeline,
+        modality=input_modality,
+        test_mode=True,
+        metainfo=metainfo,
+        box_type_3d='LiDAR',
+        backend_args=backend_args))
+test_dataloader = dict(
+    batch_size=1,
+    num_workers=1,
+    persistent_workers=True,
+    drop_last=False,
+    sampler=dict(type='DefaultSampler', shuffle=False),
+    dataset=dict(
+        type=dataset_type,
+        data_root=data_root,
+        # data_prefix=dict(pts='training/velodyne_reduced'),
+        ann_file='velo_infos_test.pkl',
+        pipeline=test_pipeline,
+        modality=input_modality,
+        test_mode=True,
+        metainfo=metainfo,
+        box_type_3d='LiDAR',
+        backend_args=backend_args))
+val_evaluator = dict(
+    type='KittiMetric',
+    ann_file=data_root + 'velo_infos_val.pkl',
+    metric='bbox',
+    backend_args=backend_args)
+test_evaluator = dict(
+    type='KittiMetric',
+    ann_file=data_root + 'velo_infos_test.pkl',
+    metric='bbox',
+    backend_args=backend_args)
 
 vis_backends = [dict(type='LocalVisBackend')]
 visualizer = dict(

@@ -108,5 +108,5 @@ param_scheduler = [
 # the training schedule. Do remind that since we use RepeatDataset and
 # repeat factor is 2, so we actually train 160 epochs.
 train_cfg = dict(by_epoch=True, max_epochs=epoch_num, val_interval=2)
-val_cfg = None
-test_cfg = None
+val_cfg = {}
+test_cfg = {}
