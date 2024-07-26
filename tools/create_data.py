@@ -4,6 +4,7 @@ from os import path as osp
 
 from mmengine import print_log
 
+from tools.dataset_converters import velo_converter
 from tools.dataset_converters import indoor_converter as indoor
 from tools.dataset_converters import kitti_converter as kitti
 from tools.dataset_converters import lyft_converter as lyft_converter
@@ -12,6 +13,10 @@ from tools.dataset_converters import semantickitti_converter
 from tools.dataset_converters.create_gt_database import (
     GTDatabaseCreater, create_groundtruth_database)
 from tools.dataset_converters.update_infos_to_v2 import update_pkl_infos
+
+
+def velo_data_prep(root_path):
+    velo_converter.create_velo_infos(root_path)
 
 
 def kitti_data_prep(root_path,
@@ -416,5 +421,7 @@ if __name__ == '__main__':
     elif args.dataset == 'semantickitti':
         semantickitti_data_prep(
             info_prefix=args.extra_tag, out_dir=args.out_dir)
+    elif args.dataset == 'velo':
+        velo_data_prep(root_path=args.root_path)
     else:
         raise NotImplementedError(f'Don\'t support {args.dataset} dataset.')
